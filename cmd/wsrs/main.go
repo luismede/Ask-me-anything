@@ -38,6 +38,7 @@ func main() {
 	if err := pool.Ping(ctx); err != nil {
 		panic(err)
 	}
+
 	handler := api.NewHandler(pgstore.New(pool))
 
 	go func() {
