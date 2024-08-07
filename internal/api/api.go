@@ -1,9 +1,11 @@
 package api
 
 import (
+	"context"
 	"errors"
 	"log/slog"
 	"net/http"
+	"sync"
 
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
@@ -15,9 +17,11 @@ import (
 )
 
 type apiHandler struct {
-	q        *pgstore.Queries
-	r        *chi.Mux
-	upgrader websocket.Upgrader
+	q           *pgstore.Queries
+	r           *chi.Mux
+	upgrader    websocket.Upgrader
+	subscribers map[string]map[*websocket.Conn]context.CancelFunc
+	mu          *sync.Mutex
 }
 
 func (h apiHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -26,8 +30,10 @@ func (h apiHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func NewHandler(q *pgstore.Queries) http.Handler {
 	a := apiHandler{
-		q:        q,
-		upgrader: websocket.Upgrader{CheckOrigin: func(r *http.Request) bool { return true }},
+		q:           q,
+		upgrader:    websocket.Upgrader{CheckOrigin: func(r *http.Request) bool { return true }},
+		subscribers: make(map[string]map[*websocket.Conn]context.CancelFunc),
+		mu:          &sync.Mutex{},
 	}
 
 	r := chi.NewRouter()
@@ -98,6 +104,16 @@ func (h apiHandler) handleSubscibe(w http.ResponseWriter, r *http.Request) {
 
 	defer c.Close()
 
+	ctx, cancel := context.WithCancel(r.Context())
+
+	h.mu.Lock()
+	if _, ok := h.subscribers[rawRoomId]; !ok {
+		h.subscribers[rawRoomId] = make(map[*websocket.Conn]context.CancelFunc)
+	}
+	h.subscribers[rawRoomId][c] = cancel
+	h.mu.Unlock()
+
+	<-ctx.Done()
 }
 
 func (h apiHandler) handleCreateRoom(w http.ResponseWriter, r *http.Request)             {}
