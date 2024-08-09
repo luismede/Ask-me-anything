@@ -26,6 +26,6 @@ services:
 
 volumes:
   db:
-    driver: local #Pode ser uma S3
+    driver: local #  S3 in future
   pgadmin:
     driver: local

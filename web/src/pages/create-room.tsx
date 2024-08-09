@@ -1,0 +1,54 @@
+import { ArrowRight } from 'lucide-react'
+import amaLogo from '../assets/ama-logo.svg'
+import { useNavigate } from 'react-router-dom'
+
+export function CreateRoom() {
+    const navigate = useNavigate()
+
+    function handleCreateRoom(data: FormData) {
+        const theme = data.get('theme')?.toString()
+        
+        console.log(theme)
+
+        navigate('/room/ac406e0e-5725-4a6b-b62b-ef1e98b9085e')
+    }
+
+    return (
+        <main className='h-screen flex items-center justify-center px-4'>
+            <div className='max-w-[450px] flex flex-col gap-6'>
+                <img src={amaLogo} alt="AMA LOGO" className='h-10' />
+
+                <p className='leading-relaxed text-zinc-300 text-center'>
+                Crie uma sala pública de AMA (Ask me anything) 
+                e priorize as perguntas mais importantes para a comunidade.
+                </p>
+
+                <form 
+                    // onSubmit={handleCreateRoom} REACT 18
+                    action={handleCreateRoom} // REACT 19
+                    className='flex items-center gap-2 bg-zinc-900 p-2 
+                        rounded-xl border border-zinc-800 ring-orange-400 ring-offset-2 ring-offset-zinc-950 focus-within:ring-2'>
+                    
+                    <input 
+                        type='text'
+                        name='theme'
+                        placeholder='Nome da sala'
+                        autoComplete='off'
+                        className='flex-1 tex-sm bg-transparent mx-3 outline-none 
+                        placeholder-zinc-500 text-zinc-100'
+                    />
+
+                    <button 
+                        type='submit'
+                        className='bg-orange-400
+                        text-orange-950 px-3 py-1.5 gap-1.5 flex items-center 
+                        rounded-lg font-medium tex-sm transition-colors hover:bg-orange-500'>
+                        Criar Sala
+                        <ArrowRight className='size-4' />
+                    </button>
+
+                </form>
+            </div>
+        </main>
+    )
+}
