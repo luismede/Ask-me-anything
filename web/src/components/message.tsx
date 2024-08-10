@@ -1,4 +1,4 @@
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Heart } from "lucide-react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { createMessageReaction } from "../http/create-message-reaction";
@@ -58,13 +58,14 @@ export function Message({ id: messageId,
         {text}
 
         {hasReacted ? (
-            <button  onClick={removeMessageReactionAction} type="button" className="mt-3 flex items-center gap-2 text-orange-400 text-sm font-medium hover:text-orange-500">
-            Curtir pergunta ({amountOfReactions})
-            <ArrowUp className="size-4" />
+            <button  onClick={removeMessageReactionAction} type="button" className="mt-3 flex items-center gap-2 text-orange-400   text-sm font-medium hover:text-zinc-200 ">
+            <Heart className="size-4"/> Remover Curtida  ({amountOfReactions})
+            <ArrowUp className="size-4"/>
+            
             </button>
         ) : (
-            <button onClick={createMessageReactionAction} type="button" className="mt-3 flex items-center gap-2 text-zinc-400 text-sm font-medium hover:text-zinc-200">
-            Curtir pergunta ({amountOfReactions})
+            <button onClick={createMessageReactionAction} type="button" className="mt-3 flex items-center gap-2 text-zinc-400 text-sm font-medium hover:text-orange-500">
+            <Heart className="size-4"/> Curtir pergunta ({amountOfReactions})
             <ArrowUp className="size-4" />
             </button>
         )}
