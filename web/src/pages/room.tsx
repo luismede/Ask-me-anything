@@ -1,8 +1,11 @@
-import { ArrowRight, Share2 } from "lucide-react"
+import { Share2 } from "lucide-react"
 import { useParams } from "react-router-dom"
 import AmaLogo from '../assets/ama-logo.svg'
 import { toast } from "sonner"
-import { Message } from "../components/message"
+import { Messages } from "../components/messages"
+import { Suspense } from "react"
+import { CreateMessageForm } from "../components/create-message-form"
+
 
 
 
@@ -46,33 +49,13 @@ export function Room() {
 
             <div className="h-px w-full bg-zinc-900"></div>
 
-            <form 
-                    className='flex items-center gap-2 bg-zinc-900 p-2 
-                        rounded-xl border border-zinc-800 ring-orange-400 ring-offset-2 ring-offset-zinc-950 focus-within:ring-2'>
-                    
-                    <input 
-                        type='text'
-                        name='theme'
-                        placeholder='Qual a sua pergunta?'
-                        autoComplete='off'
-                        className='flex-1 tex-sm bg-transparent mx-3 outline-none 
-                        placeholder-zinc-500 text-zinc-100'
-                    />
+            <CreateMessageForm />
 
-                    <button 
-                        type='submit'
-                        className='bg-orange-400
-                        text-orange-950 px-3 py-1.5 gap-1.5 flex items-center 
-                        rounded-lg font-medium tex-sm transition-colors hover:bg-orange-500'>
-                        Criar pergunta
-                        <ArrowRight className='size-4' />
-                    </button>
-                </form>
 
-                <ol className="list-decimal list-outside px-3 space-y-8">
-                    <Message text="Hello World with Go and React" amountOfReactions={10} answared/>
-                    <Message text="Hello World with Go and React 2" amountOfReactions={3}/>
-                </ol>
+            <Suspense fallback={<p>Carregando...</p>}>
+                <Messages />
+            </Suspense>
+
         </div>
     )
 }
