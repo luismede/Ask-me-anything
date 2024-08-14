@@ -55,7 +55,7 @@ export function CreateRoom() {
                         type='submit'
                         className='bg-orange-400
                         text-orange-950 px-3 py-1.5 gap-1.5 flex items-center 
-                        rounded-lg font-medium tex-sm transition-colors hover:bg-orange-500'>
+                        rounded-lg font-medium text-sm transition-colors hover:bg-orange-500'>
                         Criar Sala
                         <ArrowRight className='size-4' />
                     </button>
