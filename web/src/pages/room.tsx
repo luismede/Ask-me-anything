@@ -28,10 +28,10 @@ export function Room() {
     return (
         <div className="mx-auto max-w-[648px] flex flex-col gap-6 py-10 px-4">
             <div className="flex items-center gap-3 px-3 ">
-                <img src={AmaLogo} alt="AMA LOGO" className="h-5" />
+                <a href="/"><img src={AmaLogo} alt="AMA LOGO" className="h-6" /></a>
 
                 <span className="text-sm text-zinc-500 truncate">
-                    Código da sala: <span className="text-orange-300">{roomId}</span>
+                    Código da sala: <span className="text-zinc-300">{roomId}</span>
                 </span>
 
                 <button                         

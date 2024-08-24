@@ -58,13 +58,13 @@ export function Message({ id: messageId,
         {text}
 
         {hasReacted ? (
-            <button  onClick={removeMessageReactionAction} type="button" className="mt-3 flex items-center gap-2 text-orange-400   text-sm font-medium hover:text-zinc-200 ">
+            <button  onClick={removeMessageReactionAction} type="button" className="mt-3 flex items-center gap-2 text-cyan-400   text-sm font-medium hover:text-red-500 ">
             <Heart className="size-4"/> Remover Curtida  ({amountOfReactions})
             <ArrowUp className="size-4"/>
             
             </button>
         ) : (
-            <button onClick={createMessageReactionAction} type="button" className="mt-3 flex items-center gap-2 text-zinc-400 text-sm font-medium hover:text-orange-500">
+            <button onClick={createMessageReactionAction} type="button" className="mt-3 flex items-center gap-2 text-zinc-400 text-sm font-medium hover:text-cyan-500">
             <Heart className="size-4"/> Curtir pergunta ({amountOfReactions})
             <ArrowUp className="size-4" />
             </button>

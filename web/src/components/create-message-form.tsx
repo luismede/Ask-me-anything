@@ -30,7 +30,7 @@ export function CreateMessageForm() {
         <form
         action={createMessageAction}
         className='flex items-center gap-2 bg-zinc-900 p-2 
-        rounded-xl border border-zinc-800 ring-orange-400 ring-offset-2 ring-offset-zinc-950 focus-within:ring-2'>
+        rounded-xl border border-zinc-800 ring-cyan-700 ring-offset-2 ring-offset-zinc-950 focus-within:ring-2'>
 
         <input 
             type='text'
@@ -43,9 +43,9 @@ export function CreateMessageForm() {
 
         <button 
             type='submit'
-            className='bg-orange-400
-            text-orange-950 px-3 py-1.5 gap-1.5 flex items-center 
-            rounded-lg font-medium tex-sm transition-colors hover:bg-orange-500'>
+            className='bg-cyan-700
+            text-zinc-100 px-3 py-1.5 gap-1.5 flex items-center 
+            rounded-lg font-normal tex-sm transition-colors hover:bg-cyan-600'>
             Criar pergunta
             <ArrowRight className='size-4' />
         </button>
